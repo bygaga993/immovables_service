@@ -11,8 +11,9 @@ from forms.aparts import ApartsForm
 from forms.user import LoginForm
 
 import numpy as np
+import pickle
 
-import model
+from model import build_and_train
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -78,7 +79,7 @@ def data_aparts():
             life_sq=form.life_sq.data,
             floor=form.floor.data,
             max_floor=form.max_floor.data,
-            material=form.material.data,
+            material=1,
             build_year=form.build_year.data,
             kitch_sq=form.kitch_sq.data,
             state=form.state.data,
@@ -91,19 +92,18 @@ def data_aparts():
             university_top_20_raion=form.university_top_20_raion.data,
             sport_objects_raion=form.sport_objects_raion.data,
             additional_education_raion=form.additional_education_raion.data,
-            culture_objects_top_25='culture_objects_top_25' in res,
+            culture_objects_top_25=int('culture_objects_top_25' in res),
             culture_objects_top_25_raion=form.culture_objects_top_25_raion.data,
-            shopping_centers_raion='shopping_centers_raion' in res,
-            thermal_power_plant_raion='thermal_power_plant_raion' in res,
-            incineration_raion='incineration_raion' in res,
-            oil_chemistry_raion='oil_chemistry_raion' in res,
-            radiation_raion='radiation_raion' in res,
-            railroad_terminal_raion='railroad_terminal_raion' in res,
-            big_market_raion='big_market_raion' in res,
-            nuclear_reactor_raion='nuclear_reactor_raion' in res,
-            detention_facility_raion='detention_facility_raion' in res,
+            shopping_centers_raion=int('shopping_centers_raion' in res),
+            thermal_power_plant_raion=int('thermal_power_plant_raion' in res),
+            incineration_raion=int('incineration_raion' in res),
+            oil_chemistry_raion=int('oil_chemistry_raion' in res),
+            radiation_raion=int('radiation_raion' in res),
+            railroad_terminal_raion=int('railroad_terminal_raion' in res),
+            big_market_raion=int('big_market_raion' in res),
+            nuclear_reactor_raion=int('nuclear_reactor_raion' in res),
+            detention_facility_raion=int('detention_facility_raion' in res),
             full_all=form.full_all.data,
-            build_count_brick=form.build_count_brick.data,
             ID_metro=form.ID_metro.data,
             metro_min_avto=form.metro_min_avto.data,
             green_zone_km=form.green_zone_km.data,
@@ -113,65 +113,67 @@ def data_aparts():
             railroad_station_avto_km=form.railroad_station_avto_km.data,
             ID_railroad_station_avto=form.ID_railroad_station_avto.data,
             water_km=form.water_km.data,
-            water_1line='water_1line' in res,
-            mkad_km=form.mkad_km.data,
+            water_1line=int('water_1line' in res),
             big_road1_km=form.big_road1_km.data,
             ID_big_road1=form.ID_big_road1.data,
-            big_road1_1line='big_road1_1line' in res,
+            big_road1_1line=int('big_road1_1line' in res),
             big_road2_km=form.big_road2_km.data,
             ID_big_road2=form.ID_big_road2.data,
-            railroad_1line='railroad_1line' in res,
+            railroad_1line=int('railroad_1line' in res),
             ID_bus_terminal=form.ID_bus_terminal.data,
-            nuclear_reactor_km=form.nuclear_reactor_km.data,
             big_market_km=form.big_market_km.data,
             market_shop_km=form.market_shop_km.data,
-            fitness_km=form.fitness_km.data,
-            ice_rink_km=form.ice_rink_km.data,
             church_synagogue_km=form.church_synagogue_km.data,
-            catering_km=form.catering_km.data,
             green_part_500=form.green_part_500.data,
             prom_part_500=form.prom_part_500.data,
-            office_count_500=form.office_count_500.data,
             trc_count_500=form.trc_count_500.data,
             trc_sqm_500=form.trc_sqm_500.data,
-            cafe_count_500_price_high='cafe_count_500_price_high' in res,
+            cafe_count_500_price_high=int('cafe_count_500_price_high' in res),
             mosque_count_500=form.mosque_count_500.data,
             leisure_count_500=form.leisure_count_500.data,
             sport_count_500=form.sport_count_500.data,
             market_count_500=form.market_count_500.data,
-            cafe_count_1000_price_high=form.cafe_count_1000_price_high.data,
+            cafe_count_1000_price_high=int('cafe_count_1000_price_high' in res),
             mosque_count_1000=form.mosque_count_1000.data,
             sport_count_1000=form.sport_count_1000.data,
             market_count_1000=form.market_count_1000.data,
             mosque_count_1500=form.mosque_count_1500.data,
             mosque_count_2000=form.mosque_count_2000.data,
-            trc_sqm_3000=form.trc_sqm_3000.data,
-            market_count_3000=form.market_count_3000.data,
             mosque_count_5000=form.mosque_count_5000.data,
-            southern=request.form['raion'] == 'southern',
-            southeastern=request.form['raion'] == 'southeastern',
-            northwestern=request.form['raion'] == 'northwestern',
-            central=request.form['raion'] == 'central',
-            eastern=request.form['raion'] == 'eastern',
-            northern=request.form['raion'] == 'northern',
-            western=request.form['raion'] == 'western',
-            zelenograd=request.form['raion'] == 'zelenograd',
-            novomoskovskiy=request.form['raion'] == 'novomoskovskiy',
-            troitskiy=request.form['raion'] == 'troitskiy',
-            good=request.form['ecology'] == 'good',
-            excellent=request.form['ecology'] == 'excellent',
-            poor=request.form['ecology'] == 'poor',
-            satisfactory=request.form['ecology'] == 'satisfactory',
+            southern=int(request.form['raion'] == 'southern'),
+            southeastern=int(request.form['raion'] == 'southeastern'),
+            northwestern=int(request.form['raion'] == 'northwestern'),
+            central=int(request.form['raion'] == 'central'),
+            eastern=int(request.form['raion'] == 'eastern'),
+            northern=int(request.form['raion'] == 'northern'),
+            western=int(request.form['raion'] == 'western'),
+            zelenograd=int(request.form['raion'] == 'zelenograd'),
+            novomoskovskiy=int(request.form['raion'] == 'novomoskovskiy'),
+            good=int(request.form['ecology'] == 'good'),
+            excellent=int(request.form['ecology'] == 'excellent'),
+            poor=int(request.form['ecology'] == 'poor'),
+            satisfactory=int(request.form['ecology'] == 'satisfactory'),
         )
         data = [i for i in vars(apart).values()][3:]
+        data = np.asarray(data).reshape(1, -1)
+        print(data)
         current_user.apart.append(apart)
         db_sess.merge(current_user)
         db_sess.commit()
+
+        clf = 'model_v1.pk'
+        with open(clf, 'rb') as f:
+            loaded_model = pickle.load(f)
+
+            print("The model has been loaded...doing predictions now...")
+            predictions = loaded_model.predict(data)
+
         # res = 1000
-        data = np.asarray(data)
-        res = model.predict(data.reshape(1, -1))
-        print(res)
-        return redirect(f'/price/{res}')
+        # model = build_and_train()
+        # res = model.predict(data.reshape(1, -1))
+        # print(res)
+        print(predictions)
+        return redirect(f'/price/{predictions}')
     return render_template("data_aparts.html", form=form)
 
 

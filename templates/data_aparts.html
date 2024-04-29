@@ -213,15 +213,6 @@
         {% endfor %}
     </p>
     <p>
-        {{ form.build_count_brick.label }}<br>
-        {{ form.build_count_brick(class="form-control") }}<br>
-        {% for error in form.build_count_brick.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
         {{ form.ID_metro.label }}<br>
         {{ form.ID_metro(class="form-control") }}<br>
         {% for error in form.ID_metro.errors %}
@@ -307,15 +298,6 @@
         <label class="form-check-label" for="water_1line">Первая линия от реки (150 м)</label>
     </div>
     <p>
-        {{ form.mkad_km.label }}<br>
-        {{ form.mkad_km(class="form-control") }}<br>
-        {% for error in form.mkad_km.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
         {{ form.big_road1_km.label }}<br>
         {{ form.big_road1_km(class="form-control") }}<br>
         {% for error in form.big_road1_km.errors %}
@@ -369,15 +351,6 @@
         {% endfor %}
     </p>
     <p>
-        {{ form.nuclear_reactor_km.label }}<br>
-        {{ form.nuclear_reactor_km(class="form-control") }}<br>
-        {% for error in form.nuclear_reactor_km.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
         {{ form.big_market_km.label }}<br>
         {{ form.big_market_km(class="form-control") }}<br>
         {% for error in form.big_market_km.errors %}
@@ -396,24 +369,6 @@
         {% endfor %}
     </p>
     <p>
-        {{ form.fitness_km.label }}<br>
-        {{ form.fitness_km(class="form-control") }}<br>
-        {% for error in form.fitness_km.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.ice_rink_km.label }}<br>
-        {{ form.ice_rink_km(class="form-control") }}<br>
-        {% for error in form.ice_rink_km.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
         {{ form.church_synagogue_km.label }}<br>
         {{ form.church_synagogue_km(class="form-control") }}<br>
         {% for error in form.church_synagogue_km.errors %}
@@ -422,16 +377,6 @@
             </p>
         {% endfor %}
     </p>
-    <p>
-        {{ form.catering_km.label }}<br>
-        {{ form.catering_km(class="form-control") }}<br>
-        {% for error in form.catering_km.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-
 
     <p>
         {{ form.green_part_500.label }}<br>
@@ -446,15 +391,6 @@
         {{ form.prom_part_500.label }}<br>
         {{ form.prom_part_500(class="form-control") }}<br>
         {% for error in form.prom_part_500.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.office_count_500.label }}<br>
-        {{ form.office_count_500(class="form-control") }}<br>
-        {% for error in form.office_count_500.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
@@ -478,15 +414,10 @@
             </p>
         {% endfor %}
     </p>
-    <p>
-        {{ form.cafe_count_500_price_high.label }}<br>
-        {{ form.cafe_count_500_price_high(class="form-control") }}<br>
-        {% for error in form.cafe_count_500_price_high.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="cafe_count_500_price_high" name="cafe_count_500_price_high">
+        <label class="form-check-label" for="cafe_count_500_price_high">Счет в кафе и ресторанах, в среднем более 4000 в зоне 500 метров</label>
+    </div>
     <p>
         {{ form.mosque_count_500.label }}<br>
         {{ form.mosque_count_500(class="form-control") }}<br>
@@ -573,24 +504,6 @@
         {% endfor %}
     </p>
     <p>
-        {{ form.trc_sqm_3000.label }}<br>
-        {{ form.trc_sqm_3000(class="form-control") }}<br>
-        {% for error in form.trc_sqm_3000.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.market_count_3000.label }}<br>
-        {{ form.market_count_3000(class="form-control") }}<br>
-        {% for error in form.market_count_3000.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
         {{ form.mosque_count_5000.label }}<br>
         {{ form.mosque_count_5000(class="form-control") }}<br>
         {% for error in form.mosque_count_5000.errors %}
@@ -653,12 +566,6 @@
           <input class="form-check-input" type="radio" name="raion" id="novomoskovskiy" value="novomoskovskiy" checked>
           <label class="form-check-label" for="novomoskovskiy">
             Новомосковский
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="raion" id="troitskiy" value="troitskiy" checked>
-          <label class="form-check-label" for="troitskiy">
-            Троицкий
           </label>
         </div>
     </div>

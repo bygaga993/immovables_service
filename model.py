@@ -27,10 +27,3 @@ def build_and_train():
     model.fit(X_train, y_train)
     return model
 
-
-if __name__ == '__main__':
-    model = build_and_train()
-
-    filename = 'model_v1.pk'
-    with open(filename, 'wb') as file:
-        pickle.dump(model, file)
