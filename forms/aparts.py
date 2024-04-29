@@ -4,7 +4,7 @@ from wtforms import SubmitField, BooleanField
 from wtforms.validators import DataRequired
 
 
-class ApartsForm(FlaskForm):
+class ApartsForm(FlaskForm):  # класс wtf форм для полей ввода данных о квартире
     address = StringField('Адрес', validators=[DataRequired()])
     number = IntegerField('Номер квартиры', validators=[DataRequired()])
     town = StringField('Введите город:', validators=[DataRequired()])

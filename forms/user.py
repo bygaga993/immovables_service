@@ -3,7 +3,7 @@ from wtforms import PasswordField, StringField, SubmitField, EmailField, Boolean
 from wtforms.validators import DataRequired
 
 
-class RegisterForm(FlaskForm):
+class RegisterForm(FlaskForm):  # класс wtf форм для полей ввода данных для регистрации аккаунта
     email = EmailField('Логин / email', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     password_again = PasswordField('Повторить пароль', validators=[DataRequired()])
@@ -14,7 +14,7 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Подтвердить')
 
 
-class LoginForm(FlaskForm):
+class LoginForm(FlaskForm):  # класс wtf форм для полей ввода данных для входа в аккаунт
     email = EmailField('Почта', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     remember_me = BooleanField('Запомнить меня')

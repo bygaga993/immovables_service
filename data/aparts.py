@@ -3,7 +3,7 @@ from .db_session import SqlAlchemyBase
 from sqlalchemy import orm
 
 
-class Apartments(SqlAlchemyBase):
+class Apartments(SqlAlchemyBase):  # класс со столбцами SqlAlchemy базы данных квартир
     __tablename__ = 'aparts'
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
@@ -96,4 +96,4 @@ class Apartments(SqlAlchemyBase):
     poor = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     satisfactory = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
 
-    user = orm.relationship('User')
+    user = orm.relationship('User')  # создаём связь с классом User по users.id

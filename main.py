@@ -30,18 +30,18 @@ def load_user(user_id):
     return db_sess.query(User).get(user_id)
 
 
-def main():
+def main():  # запуск сервера и инициализация БД
     db_session.global_init("db/blogs.db")
     app.run()
 
 
 @app.route("/", methods=['POST', 'GET'])
-def index():
+def index():  # обработчик главной страницы сайта
     global address, full_sq, number_rooms
     form = ApartsForm()
-    if not current_user.is_authenticated:
+    if not current_user.is_authenticated:  # проверка на авторизацию пользователя
         return redirect('/please_login')
-    if form.is_submitted():
+    if form.is_submitted():  # проверка на POST запрос об отправке данных пользователем
         address = form.address.data,
         full_sq = form.full_sq.data,
         number_rooms = form.number_rooms.data
@@ -50,26 +50,26 @@ def index():
 
 
 @app.route("/about")
-def about():
+def about():  # обработчик страницы о сервисе
     return render_template("about.html")
 
 
 @app.route("/please_login")
-def please_login():
+def please_login():  # обработчик страницы требующей авторизации
     return render_template("please_login.html")
 
 
 @app.route("/advantages")
-def advantages():
+def advantages():  # обработчик страницы с преимуществами сервиса
     return render_template("advantages.html")
 
 
 @app.route("/data_aparts", methods=['GET', 'POST'])
-def data_aparts():
+def data_aparts():  # обработчик страницы с вводом данных о квартире
     form = ApartsForm()
-    if not current_user.is_authenticated:
+    if not current_user.is_authenticated:  # проверка на авторизацию пользователя
         redirect('/please_login')
-    if form.is_submitted():
+    if form.is_submitted():  # проверка на POST запрос об отправке данных пользователем
         db_sess = db_session.create_session()
         res = [i for i in request.form]
         apart = Apartments(
@@ -154,36 +154,37 @@ def data_aparts():
             poor=int(request.form['ecology'] == 'poor'),
             satisfactory=int(request.form['ecology'] == 'satisfactory'),
         )
-        data = [i for i in vars(apart).values()][3:]
-        data = np.asarray(data).reshape(1, -1)
+        data = [i for i in vars(apart).values()][3:]  # получаем список переданных данных
+        data = np.asarray(data).reshape(1, -1)  # переводим в массив numpy
         print(data)
-        current_user.apart.append(apart)
+        current_user.apart.append(apart)  # добавляем для текущего пользователя данные о квартире
         db_sess.merge(current_user)
         db_sess.commit()
 
         clf = 'model_v1.pk'
-        with open(clf, 'rb') as f:
+        with open(clf, 'rb') as f:  # открытие обученной модели ML
             loaded_model = pickle.load(f)
 
             print("The model has been loaded...doing predictions now...")
-            predictions = loaded_model.predict(data)
+            predictions = loaded_model.predict(data)  # передаем данные в модель и получаем предсказание цены
 
         # res = 1000
         # model = build_and_train()
         # res = model.predict(data.reshape(1, -1))
         # print(res)
         print(predictions)
-        return redirect(f'/price/{predictions}')
+        return redirect(f'/price/{predictions}')  # перенаправляем на страницу со стоимостью квартиры
     return render_template("data_aparts.html", form=form)
 
 
 @app.route("/town", methods=['GET', 'POST'])
-def town():
+def town():  # обработчик страницы для изменения города пользователя
     form = ApartsForm()
-    if form.is_submitted():
-        cords = get_coordinates(form.town.data)
-        take_town_img(cords)
+    if form.is_submitted():  # проверка на POST запрос об отправке данных пользователем
+        cords = get_coordinates(form.town.data)  # получаем координаты города
+        take_town_img(cords)  # получаем изображение города на карте
         db_sess = db_session.create_session()
+        # меняем город пользователя в базе данных
         db_sess.query(User).filter(User.id == current_user.id).first().town = form.town.data
         db_sess.commit()
     return render_template("town.html", form=form)
@@ -197,9 +198,9 @@ def town():
 
 
 @app.route('/register', methods=['GET', 'POST'])
-def reqister():
+def reqister():  # обработчик формы регистрации
     form = RegisterForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit():  # проверка на POST запрос об отправке данных пользователем
         if form.password.data != form.password_again.data:
             return render_template('register.html', title='Регистрация',
                                    form=form,
@@ -217,16 +218,16 @@ def reqister():
             town=form.town.data,
         )
         user.set_password(form.password.data)
-        db_sess.add(user)
+        db_sess.add(user)  # добавление нового пользователя в базу данных
         db_sess.commit()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+def login():  # обработчик формы входа в аккаунт
     form = LoginForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit():  # проверка на POST запрос об отправке данных пользователем
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.email == form.email.data).first()
         if user and user.check_password(form.password.data):
@@ -240,14 +241,14 @@ def login():
 
 @app.route('/logout')
 @login_required
-def logout():
+def logout():  # обработчик для выхода из аккаунта
     logout_user()
     return redirect("/")
 
 
 @app.route('/price/<price>')
 @login_required
-def get_price(price):
+def get_price(price):  # обработчик страницы выводящей финальную оценку квартиры
     return render_template('price.html', price=price)
 
 
