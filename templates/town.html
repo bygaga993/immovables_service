@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="label_site_advantages">
+    <p>Ваш город</p>
+</section>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.town.label }}<br>
+        {{ form.town(class="form-control") }}<br>
+        {% for error in form.town.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+</form>
+<div class="text-center">
+    <img class="w-10 p-3 text-center" src="static/img/town.jpg" alt="">
+</div>
+{% endblock %}

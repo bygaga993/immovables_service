@@ -1,0 +1,694 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="label_site">
+    <div class="data-label" id="data">
+    <p>Для точной оценки потребуются некоторые данные о вашей квартире.</p>
+    </div>
+</section>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.life_sq.label}}<br>
+        {{ form.life_sq(class="form-control") }}<br>
+        {% for error in form.life_sq.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.floor.label }}<br>
+        {{ form.floor(class="form-control") }}<br>
+        {% for error in form.floor.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.max_floor.label }}<br>
+        {{ form.max_floor(class="form-control") }}<br>
+        {% for error in form.max_floor.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.material.label }}<br>
+        {{ form.material(class="form-control") }}<br>
+        {% for error in form.material.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.build_year.label }}<br>
+        {{ form.build_year(class="form-control") }}<br>
+        {% for error in form.build_year.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.kitch_sq.label }}<br>
+        {{ form.kitch_sq(class="form-control") }}<br>
+        {% for error in form.kitch_sq.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.state.label }}<br>
+        {{ form.state(class="form-control") }}<br>
+        {% for error in form.state.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.area_m.label }}<br>
+        {{ form.area_m(class="form-control") }}<br>
+        {% for error in form.area_m.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.raion_popul.label }}<br>
+        {{ form.raion_popul(class="form-control") }}<br>
+        {% for error in form.raion_popul.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.green_zone_part.label }}<br>
+        {{ form.green_zone_part(class="form-control") }}<br>
+        {% for error in form.green_zone_part.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.indust_part.label }}<br>
+        {{ form.indust_part(class="form-control") }}<br>
+        {% for error in form.indust_part.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.school_education_centers_top_20_raion.label }}<br>
+        {{ form.school_education_centers_top_20_raion(class="form-control") }}<br>
+        {% for error in form.school_education_centers_top_20_raion.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.healthcare_centers_raion.label }}<br>
+        {{ form.healthcare_centers_raion(class="form-control") }}<br>
+        {% for error in form.healthcare_centers_raion.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.university_top_20_raion.label }}<br>
+        {{ form.university_top_20_raion(class="form-control") }}<br>
+        {% for error in form.university_top_20_raion.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.sport_objects_raion.label }}<br>
+        {{ form.sport_objects_raion(class="form-control") }}<br>
+        {% for error in form.sport_objects_raion.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.additional_education_raion.label }}<br>
+        {{ form.additional_education_raion(class="form-control") }}<br>
+        {% for error in form.additional_education_raion.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.culture_objects_top_25_raion.label }}<br>
+        {{ form.culture_objects_top_25_raion(class="form-control") }}<br>
+        {% for error in form.culture_objects_top_25_raion.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <label>Наличие в районе:</label>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="culture_objects_top_25" name="culture_objects_top_25">
+        <label class="form-check-label" for="culture_objects_top_25">Ключевых объектов культурного наследия</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="shopping_centers_raion" name="shopping_centers_raion">
+        <label class="form-check-label" for="shopping_centers_raion">ТЦ</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="thermal_power_plant_raion" name="thermal_power_plant_raion">
+        <label class="form-check-label" for="thermal_power_plant_raion">ТЭЦ</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="incineration_raion" name="incineration_raion">
+        <label class="form-check-label" for="incineration_raion">Мусоросжигательных заводов</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="oil_chemistry_raion" name="oil_chemistry_raion">
+        <label class="form-check-label" for="oil_chemistry_raion">Грязных производств</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="radiation_raion" name="radiation_raion">
+        <label class="form-check-label" for="radiation_raion">Радиации</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="railroad_terminal_raion" name="railroad_terminal_raion">
+        <label class="form-check-label" for="railroad_terminal_raion">Железнодорожного вокзала в районе</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="big_market_raion" name="big_market_raion">
+        <label class="form-check-label" for="big_market_raion">Супермаркетов</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="nuclear_reactor_raion" name="nuclear_reactor_raion">
+        <label class="form-check-label" for="nuclear_reactor_raion">Действующих ядерных реакторов</label>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="detention_facility_raion" name="detention_facility_raion">
+        <label class="form-check-label" for="detention_facility_raion">Следственных изоляторов, тюрем</label>
+    </div>
+
+    <p>
+        {{ form.full_all.label }}<br>
+        {{ form.full_all(class="form-control") }}<br>
+        {% for error in form.full_all.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.build_count_brick.label }}<br>
+        {{ form.build_count_brick(class="form-control") }}<br>
+        {% for error in form.build_count_brick.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.ID_metro.label }}<br>
+        {{ form.ID_metro(class="form-control") }}<br>
+        {% for error in form.ID_metro.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.metro_min_avto.label }}<br>
+        {{ form.metro_min_avto(class="form-control") }}<br>
+        {% for error in form.metro_min_avto.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.green_zone_km.label }}<br>
+        {{ form.green_zone_km(class="form-control") }}<br>
+        {% for error in form.green_zone_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.industrial_km.label }}<br>
+        {{ form.industrial_km(class="form-control") }}<br>
+        {% for error in form.industrial_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.water_treatment_km.label }}<br>
+        {{ form.water_treatment_km(class="form-control") }}<br>
+        {% for error in form.water_treatment_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.cemetery_km.label }}<br>
+        {{ form.cemetery_km(class="form-control") }}<br>
+        {% for error in form.cemetery_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.railroad_station_avto_km.label }}<br>
+        {{ form.railroad_station_avto_km(class="form-control") }}<br>
+        {% for error in form.railroad_station_avto_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.ID_railroad_station_avto.label }}<br>
+        {{ form.ID_railroad_station_avto(class="form-control") }}<br>
+        {% for error in form.ID_railroad_station_avto.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.water_km.label }}<br>
+        {{ form.water_km(class="form-control") }}<br>
+        {% for error in form.water_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="water_1line" name="water_1line">
+        <label class="form-check-label" for="water_1line">Первая линия от реки (150 м)</label>
+    </div>
+    <p>
+        {{ form.mkad_km.label }}<br>
+        {{ form.mkad_km(class="form-control") }}<br>
+        {% for error in form.mkad_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.big_road1_km.label }}<br>
+        {{ form.big_road1_km(class="form-control") }}<br>
+        {% for error in form.big_road1_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.ID_big_road1.label }}<br>
+        {{ form.ID_big_road1(class="form-control") }}<br>
+        {% for error in form.ID_big_road1.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="big_road1_1line" name="big_road1_1line">
+        <label class="form-check-label" for="big_road1_1line">Первая линия от дороги (100 м до трассы, 250 м до МКАД)</label>
+    </div>
+    <p>
+        {{ form.big_road2_km.label }}<br>
+        {{ form.big_road2_km(class="form-control") }}<br>
+        {% for error in form.big_road2_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.ID_big_road2.label }}<br>
+        {{ form.ID_big_road2(class="form-control") }}<br>
+        {% for error in form.ID_big_road2.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="railroad_1line" name="railroad_1line">
+        <label class="form-check-label" for="railroad_1line">Первая линия от железной дороги (100 м)</label>
+    </div>
+    <p>
+        {{ form.ID_bus_terminal.label }}<br>
+        {{ form.ID_bus_terminal(class="form-control") }}<br>
+        {% for error in form.ID_bus_terminal.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.nuclear_reactor_km.label }}<br>
+        {{ form.nuclear_reactor_km(class="form-control") }}<br>
+        {% for error in form.nuclear_reactor_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.big_market_km.label }}<br>
+        {{ form.big_market_km(class="form-control") }}<br>
+        {% for error in form.big_market_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.market_shop_km.label }}<br>
+        {{ form.market_shop_km(class="form-control") }}<br>
+        {% for error in form.market_shop_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.fitness_km.label }}<br>
+        {{ form.fitness_km(class="form-control") }}<br>
+        {% for error in form.fitness_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.ice_rink_km.label }}<br>
+        {{ form.ice_rink_km(class="form-control") }}<br>
+        {% for error in form.ice_rink_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.church_synagogue_km.label }}<br>
+        {{ form.church_synagogue_km(class="form-control") }}<br>
+        {% for error in form.church_synagogue_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.catering_km.label }}<br>
+        {{ form.catering_km(class="form-control") }}<br>
+        {% for error in form.catering_km.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+
+
+    <p>
+        {{ form.green_part_500.label }}<br>
+        {{ form.green_part_500(class="form-control") }}<br>
+        {% for error in form.green_part_500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.prom_part_500.label }}<br>
+        {{ form.prom_part_500(class="form-control") }}<br>
+        {% for error in form.prom_part_500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.office_count_500.label }}<br>
+        {{ form.office_count_500(class="form-control") }}<br>
+        {% for error in form.office_count_500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.trc_count_500.label }}<br>
+        {{ form.trc_count_500(class="form-control") }}<br>
+        {% for error in form.trc_count_500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.trc_sqm_500.label }}<br>
+        {{ form.trc_sqm_500(class="form-control") }}<br>
+        {% for error in form.trc_sqm_500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.cafe_count_500_price_high.label }}<br>
+        {{ form.cafe_count_500_price_high(class="form-control") }}<br>
+        {% for error in form.cafe_count_500_price_high.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.mosque_count_500.label }}<br>
+        {{ form.mosque_count_500(class="form-control") }}<br>
+        {% for error in form.mosque_count_500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.leisure_count_500.label }}<br>
+        {{ form.leisure_count_500(class="form-control") }}<br>
+        {% for error in form.leisure_count_500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.sport_count_500.label }}<br>
+        {{ form.sport_count_500(class="form-control") }}<br>
+        {% for error in form.sport_count_500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.market_count_500.label }}<br>
+        {{ form.market_count_500(class="form-control") }}<br>
+        {% for error in form.market_count_500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="cafe_count_1000_price_high" name="cafe_count_1000_price_high">
+        <label class="form-check-label" for="cafe_count_1000_price_high">Счет в кафе и ресторанах, в среднем более 4000 в зоне 1000 метров</label>
+    </div>
+    <p>
+        {{ form.mosque_count_1000.label }}<br>
+        {{ form.mosque_count_1000(class="form-control") }}<br>
+        {% for error in form.mosque_count_1000.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.sport_count_1000.label }}<br>
+        {{ form.sport_count_1000(class="form-control") }}<br>
+        {% for error in form.sport_count_1000.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.market_count_1000.label }}<br>
+        {{ form.market_count_1000(class="form-control") }}<br>
+        {% for error in form.market_count_1000.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.mosque_count_1500.label }}<br>
+        {{ form.mosque_count_1500(class="form-control") }}<br>
+        {% for error in form.mosque_count_1500.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.mosque_count_2000.label }}<br>
+        {{ form.mosque_count_2000(class="form-control") }}<br>
+        {% for error in form.mosque_count_2000.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.trc_sqm_3000.label }}<br>
+        {{ form.trc_sqm_3000(class="form-control") }}<br>
+        {% for error in form.trc_sqm_3000.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.market_count_3000.label }}<br>
+        {{ form.market_count_3000(class="form-control") }}<br>
+        {% for error in form.market_count_3000.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.mosque_count_5000.label }}<br>
+        {{ form.mosque_count_5000(class="form-control") }}<br>
+        {% for error in form.mosque_count_5000.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <div class="form-group">
+        <label>Район Москвы</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="southern" value="southern" checked>
+          <label class="form-check-label" for="southern">
+            Южный
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="southeastern" value="southeastern">
+          <label class="form-check-label" for="southeastern">
+            Юго-восточный
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="northwestern" value="northwestern" checked>
+          <label class="form-check-label" for="northwestern">
+            Северо-западный
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="central" value="central" checked>
+          <label class="form-check-label" for="central">
+            Центральный
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="eastern" value="eastern" checked>
+          <label class="form-check-label" for="eastern">
+            Восточный
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="northern" value="northern" checked>
+          <label class="form-check-label" for="northern">
+            Северный
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="western" value="western" checked>
+          <label class="form-check-label" for="western">
+            Западный
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="zelenograd" value="zelenograd" checked>
+          <label class="form-check-label" for="zelenograd">
+            Зеленоград
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="novomoskovskiy" value="novomoskovskiy" checked>
+          <label class="form-check-label" for="novomoskovskiy">
+            Новомосковский
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="raion" id="troitskiy" value="troitskiy" checked>
+          <label class="form-check-label" for="troitskiy">
+            Троицкий
+          </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Экология района</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="ecology" id="excellent" value="excellent" checked>
+          <label class="form-check-label" for="excellent">
+            Отличная
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="ecology" id="good" value="good">
+          <label class="form-check-label" for="good">
+            Хорошая
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="ecology" id="satisfactory" value="satisfactory" checked>
+          <label class="form-check-label" for="satisfactory">
+            Средняя
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="ecology" id="poor" value="poor" checked>
+          <label class="form-check-label" for="poor">
+            Плохая
+          </label>
+        </div>
+    </div>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+{% endblock %}

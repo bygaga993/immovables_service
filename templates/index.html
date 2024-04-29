@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="label_site">
+    <p>Узнайте рыночную стоимость квартиры</p>
+    <img src="static/img/home.jpg">
+</section>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.address.label}}<br>
+        {{ form.address(class="form-control") }}<br>
+        {% for error in form.address.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.full_sq.label }}<br>
+        {{ form.full_sq(class="form-control") }}<br>
+        {% for error in form.full_sq.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.number_rooms.label }}<br>
+        {{ form.number_rooms(class="form-control") }}<br>
+        {% for error in form.number_rooms.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+{% endblock %}
